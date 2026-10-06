@@ -1,0 +1,214 @@
+﻿@model IEnumerable<SmartCanteen.Models.MenuItem>
+
+@{
+    ViewData["Title"] = "Checkout";
+}
+
+<div class="container">
+
+    <!-- Page Header -->
+
+    <div class="text-center mb-4">
+
+        <h1 class="fw-bold">
+            🛒 SmartCanteen Checkout
+        </h1>
+
+        <p class="text-muted">
+            Review your order and choose your pickup time.
+        </p>
+
+    </div>
+
+
+    <form asp-action="Checkout"
+          method="post">
+
+        @Html.AntiForgeryToken()
+
+
+        <!-- Validation -->
+
+        <div asp-validation-summary="All"
+             class="alert alert-danger">
+        </div>
+
+
+        <!-- Student Details -->
+
+        <div class="card border-0 shadow-sm mb-4">
+
+            <div class="card-body p-4">
+
+                <h4 class="fw-bold mb-3">
+                    👨‍🎓 Student Details
+                </h4>
+
+                <label class="form-label fw-semibold">
+                    Roll Number
+                </label>
+
+                <input name="RollNo"
+                       class="form-control"
+                       placeholder="Enter your roll number"
+                       required />
+
+                <div class="form-text">
+                    Enter the roll number registered with
+                    SmartCanteen.
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Menu Items -->
+
+        <div class="card border-0 shadow-sm mb-4">
+
+            <div class="card-body p-4">
+
+                <h4 class="fw-bold mb-4">
+                    🍽️ Select Items
+                </h4>
+
+
+                <div class="row g-4">
+
+                    @{
+                        int index = 0;
+                    }
+
+                    @foreach (var item in Model)
+                    {
+                        int selectedQuantity = 0;
+
+                        if (ViewBag.SelectedMenuItemId != null &&
+                            ViewBag.SelectedMenuItemId == item.Id)
+                        {
+                            selectedQuantity =
+                                ViewBag.SelectedQuantity ?? 1;
+                        }
+
+                        int maxQuantity = Math.Min(
+                            item.StockQty,
+                            10);
+
+
+                        <div class="col-md-6 col-lg-4">
+
+                            <div class="card h-100 border shadow-sm">
+
+                                <div class="card-body">
+
+                                    <h5 class="fw-bold">
+                                        @item.Name
+                                    </h5>
+
+                                    <h5 class="text-primary fw-bold">
+                                        ₹@item.Price.ToString("0.00")
+                                    </h5>
+
+                                    <p class="text-muted mb-1">
+
+                                        ⏱️
+                                        @item.PrepMinutes minutes
+
+                                    </p>
+
+                                    <p class="text-muted">
+
+                                        📦
+                                        @item.StockQty available
+
+                                    </p>
+
+
+                                    <input type="hidden"
+                                           name="Lines[@index].MenuItemId"
+                                           value="@item.Id" />
+
+
+                                    <label class="form-label fw-semibold">
+
+                                        Quantity
+
+                                    </label>
+
+
+                                    <input type="number"
+                                           name="Lines[@index].Quantity"
+                                           value="@selectedQuantity"
+                                           min="0"
+                                           max="@maxQuantity"
+                                           class="form-control" />
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        index++;
+                    }
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Pickup -->
+
+        <div class="card border-0 shadow-sm mb-4">
+
+            <div class="card-body p-4">
+
+                <h4 class="fw-bold mb-3">
+                    ⏰ Pickup Details
+                </h4>
+
+                <label class="form-label fw-semibold">
+                    Preferred Pickup Time
+                </label>
+
+                <input type="datetime-local"
+                       name="PreferredPickup"
+                       class="form-control" />
+
+                <div class="form-text">
+                    Select a convenient time to collect
+                    your order.
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Actions -->
+
+        <div class="text-center mb-5">
+
+            <button type="submit"
+                    class="btn btn-success btn-lg px-5">
+
+                ✓ Place Order
+
+            </button>
+
+            <a asp-controller="Menu"
+               asp-action="Index"
+               class="btn btn-outline-secondary btn-lg ms-2">
+
+                Back to Menu
+
+            </a>
+
+        </div>
+
+    </form>
+
+</div>

@@ -1,0 +1,293 @@
+﻿@{
+    ViewData["Title"] = "Home";
+}
+
+<div class="container">
+
+    <!-- Hero Section -->
+
+    <div class="p-5 mb-5 bg-primary text-white rounded-4 shadow">
+
+        <div class="row align-items-center">
+
+            <div class="col-md-8">
+
+                <h1 class="display-4 fw-bold">
+                    🍽️ SmartCanteen
+                </h1>
+
+                <p class="lead mt-3">
+                    Smart Canteen Pre-Order and Pickup Slot
+                    Management System
+                </p>
+
+                <p class="mb-4">
+                    Order your favourite canteen food in advance,
+                    choose a convenient pickup time, and avoid
+                    unnecessary waiting.
+                </p>
+
+                <a asp-controller="Menu"
+                   asp-action="Index"
+                   class="btn btn-light btn-lg me-2">
+
+                    Browse Menu
+
+                </a>
+
+                <a asp-controller="Orders"
+                   asp-action="MyOrders"
+                   class="btn btn-outline-light btn-lg">
+
+                    My Orders
+
+                </a>
+
+            </div>
+
+            <div class="col-md-4 text-center mt-4 mt-md-0">
+
+                <div class="display-1">
+                    🍔
+                </div>
+
+                <div class="display-6">
+                    🥤 🍕 🍟
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- Features -->
+
+    <h2 class="text-center mb-4">
+        Why Use SmartCanteen?
+    </h2>
+
+    <div class="row g-4">
+
+        <div class="col-md-4">
+
+            <div class="card h-100 shadow-sm border-0">
+
+                <div class="card-body text-center p-4">
+
+                    <div class="display-5 mb-3">
+                        🛒
+                    </div>
+
+                    <h4>
+                        Easy Pre-Ordering
+                    </h4>
+
+                    <p class="text-muted">
+                        Browse the available menu and place
+                        your food order before reaching the
+                        canteen.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="col-md-4">
+
+            <div class="card h-100 shadow-sm border-0">
+
+                <div class="card-body text-center p-4">
+
+                    <div class="display-5 mb-3">
+                        ⏰
+                    </div>
+
+                    <h4>
+                        Pickup Slots
+                    </h4>
+
+                    <p class="text-muted">
+                        Choose a preferred pickup time and
+                        reduce waiting time during busy
+                        college hours.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="col-md-4">
+
+            <div class="card h-100 shadow-sm border-0">
+
+                <div class="card-body text-center p-4">
+
+                    <div class="display-5 mb-3">
+                        📋
+                    </div>
+
+                    <h4>
+                        Order Tracking
+                    </h4>
+
+                    <p class="text-muted">
+                        Track your order status from placed
+                        to preparing, ready, and completed.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- How It Works -->
+
+    <div class="mt-5">
+
+        <h2 class="text-center mb-4">
+            How It Works
+        </h2>
+
+        <div class="row g-4 text-center">
+
+            <div class="col-md-3">
+
+                <div class="card border-0 bg-light h-100">
+
+                    <div class="card-body">
+
+                        <h3>
+                            1
+                        </h3>
+
+                        <h5>
+                            Browse Menu
+                        </h5>
+
+                        <p class="text-muted mb-0">
+                            Select your favourite food items.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-md-3">
+
+                <div class="card border-0 bg-light h-100">
+
+                    <div class="card-body">
+
+                        <h3>
+                            2
+                        </h3>
+
+                        <h5>
+                            Place Order
+                        </h5>
+
+                        <p class="text-muted mb-0">
+                            Select quantities and submit
+                            your order.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-md-3">
+
+                <div class="card border-0 bg-light h-100">
+
+                    <div class="card-body">
+
+                        <h3>
+                            3
+                        </h3>
+
+                        <h5>
+                            Track Order
+                        </h5>
+
+                        <p class="text-muted mb-0">
+                            Monitor your order status.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-md-3">
+
+                <div class="card border-0 bg-light h-100">
+
+                    <div class="card-body">
+
+                        <h3>
+                            4
+                        </h3>
+
+                        <h5>
+                            Pick Up
+                        </h5>
+
+                        <p class="text-muted mb-0">
+                            Collect your order at the
+                            selected time.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- Call To Action -->
+
+    <div class="text-center mt-5 mb-4">
+
+        <h3>
+            Ready to order?
+        </h3>
+
+        <p class="text-muted">
+            Explore the menu and place your order now.
+        </p>
+
+        <a asp-controller="Menu"
+           asp-action="Index"
+           class="btn btn-primary btn-lg px-5">
+
+            Start Ordering
+
+        </a>
+
+    </div>
+
+</div>

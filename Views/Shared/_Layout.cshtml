@@ -1,0 +1,237 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8" />
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0" />
+
+    <title>
+        @ViewData["Title"] - SmartCanteen
+    </title>
+
+    <script type="importmap"></script>
+
+    <link rel="stylesheet"
+          href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+
+    <link rel="stylesheet"
+          href="~/css/site.css"
+          asp-append-version="true" />
+
+    <link rel="stylesheet"
+          href="~/SmartCanteen.styles.css"
+          asp-append-version="true" />
+
+</head>
+
+<body>
+
+    <!-- Navigation Bar -->
+
+    <header>
+
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm">
+
+            <div class="container">
+
+                <!-- Brand -->
+
+                <a class="navbar-brand fw-bold fs-4"
+                   asp-controller="Home"
+                   asp-action="Index">
+
+                    🍽️ SmartCanteen
+
+                </a>
+
+                <!-- Mobile Menu Button -->
+
+                <button class="navbar-toggler"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#mainNavigation"
+                        aria-controls="mainNavigation"
+                        aria-expanded="false"
+                        aria-label="Toggle navigation">
+
+                    <span class="navbar-toggler-icon"></span>
+
+                </button>
+
+                <!-- Navigation Links -->
+
+                <div class="collapse navbar-collapse"
+                     id="mainNavigation">
+
+                    <ul class="navbar-nav ms-auto align-items-lg-center">
+
+                        <li class="nav-item">
+
+                            <a class="nav-link"
+                               asp-controller="Home"
+                               asp-action="Index">
+
+                                Home
+
+                            </a>
+
+                        </li>
+
+                        <li class="nav-item">
+
+                            <a class="nav-link"
+                               asp-controller="Menu"
+                               asp-action="Index">
+
+                                Menu
+
+                            </a>
+
+                        </li>
+
+                        <li class="nav-item">
+
+                            <a class="nav-link"
+                               asp-controller="Orders"
+                               asp-action="MyOrders">
+
+                                My Orders
+
+                            </a>
+
+                        </li>
+
+                        <li class="nav-item">
+
+                            <a class="nav-link"
+                               asp-controller="Kitchen"
+                               asp-action="Index">
+
+                                Kitchen
+
+                            </a>
+
+                        </li>
+
+                        <li class="nav-item">
+
+                            <a class="nav-link"
+                               asp-controller="Menu"
+                               asp-action="Manage">
+
+                                Manage Menu
+
+                            </a>
+
+                        </li>
+
+                    </ul>
+
+                </div>
+
+            </div>
+
+        </nav>
+
+    </header>
+
+
+    <!-- Main Content -->
+
+    <main role="main">
+
+        <div class="container py-4">
+
+            @RenderBody()
+
+        </div>
+
+    </main>
+
+
+    <!-- Footer -->
+
+    <footer class="border-top bg-light mt-5">
+
+        <div class="container py-4">
+
+            <div class="row align-items-center">
+
+                <div class="col-md-6">
+
+                    <h6 class="fw-bold mb-1">
+                        🍽️ SmartCanteen
+                    </h6>
+
+                    <small class="text-muted">
+                        Smart Canteen Pre-Order and Pickup Slot
+                        Management System
+                    </small>
+
+                </div>
+
+                <div class="col-md-6 text-md-end mt-3 mt-md-0">
+
+                    <a class="text-decoration-none me-3"
+                       asp-controller="Home"
+                       asp-action="Index">
+
+                        Home
+
+                    </a>
+
+                    <a class="text-decoration-none me-3"
+                       asp-controller="Menu"
+                       asp-action="Index">
+
+                        Menu
+
+                    </a>
+
+                    <a class="text-decoration-none"
+                       asp-controller="Home"
+                       asp-action="Privacy">
+
+                        Privacy
+
+                    </a>
+
+                </div>
+
+            </div>
+
+            <hr />
+
+            <div class="text-center">
+
+                <small class="text-muted">
+                    © 2026 SmartCanteen. All rights reserved.
+                </small>
+
+            </div>
+
+        </div>
+
+    </footer>
+
+
+    <!-- Scripts -->
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script src="~/js/site.js"
+            asp-append-version="true">
+    </script>
+
+    @await RenderSectionAsync(
+        "Scripts",
+        required: false)
+
+</body>
+
+</html>

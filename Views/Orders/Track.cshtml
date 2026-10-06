@@ -1,0 +1,324 @@
+﻿@model SmartCanteen.Models.Order
+
+@{
+    ViewData["Title"] = "Order Tracking";
+}
+
+<div class="container">
+
+    <!-- Page Header -->
+
+    <div class="text-center mb-4">
+
+        <h1 class="fw-bold">
+            📦 Order Tracking
+        </h1>
+
+        <p class="text-muted">
+            Track your SmartCanteen order in real time.
+        </p>
+
+    </div>
+
+
+    <!-- Main Order Card -->
+
+    <div class="card border-0 shadow-sm mb-4">
+
+        <div class="card-body p-4">
+
+            <!-- Top Summary -->
+
+            <div class="row text-center g-4">
+
+                <div class="col-md-4">
+
+                    <div class="bg-light rounded-3 p-3">
+
+                        <p class="text-muted mb-1">
+                            Token Number
+                        </p>
+
+                        <h2 class="fw-bold text-primary mb-0">
+                            #@Model.TokenNo
+                        </h2>
+
+                    </div>
+
+                </div>
+
+
+                <div class="col-md-4">
+
+                    <div class="bg-light rounded-3 p-3">
+
+                        <p class="text-muted mb-1">
+                            Order Status
+                        </p>
+
+                        @if (Model.Status == "Placed")
+                        {
+                            <span class="badge bg-primary fs-6 px-3 py-2">
+                                Placed
+                            </span>
+                        }
+                        else if (Model.Status == "Preparing")
+                        {
+                            <span class="badge bg-warning text-dark fs-6 px-3 py-2">
+                                Preparing
+                            </span>
+                        }
+                        else if (Model.Status == "Ready")
+                        {
+                            <span class="badge bg-success fs-6 px-3 py-2">
+                                Ready
+                            </span>
+                        }
+                        else if (Model.Status == "Completed")
+                        {
+                            <span class="badge bg-secondary fs-6 px-3 py-2">
+                                Completed
+                            </span>
+                        }
+
+                    </div>
+
+                </div>
+
+
+                <div class="col-md-4">
+
+                    <div class="bg-light rounded-3 p-3">
+
+                        <p class="text-muted mb-1">
+                            Total Amount
+                        </p>
+
+                        <h3 class="fw-bold text-success mb-0">
+                            ₹@Model.TotalAmount.ToString("0.00")
+                        </h3>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <hr class="my-4" />
+
+
+            <!-- Order Progress -->
+
+            <h4 class="fw-bold mb-3">
+                📊 Order Progress
+            </h4>
+
+            <div class="progress mb-3"
+                 style="height: 32px;">
+
+                @if (Model.Status == "Placed")
+                {
+                    <div class="progress-bar bg-primary"
+                         style="width: 25%;">
+                        Placed
+                    </div>
+                }
+                else if (Model.Status == "Preparing")
+                {
+                    <div class="progress-bar bg-warning text-dark"
+                         style="width: 50%;">
+                        Preparing
+                    </div>
+                }
+                else if (Model.Status == "Ready")
+                {
+                    <div class="progress-bar bg-success"
+                         style="width: 75%;">
+                        Ready
+                    </div>
+                }
+                else if (Model.Status == "Completed")
+                {
+                    <div class="progress-bar bg-secondary"
+                         style="width: 100%;">
+                        Completed
+                    </div>
+                }
+
+            </div>
+
+            <div class="d-flex justify-content-between
+                        text-muted small mb-4">
+
+                <span>Placed</span>
+                <span>Preparing</span>
+                <span>Ready</span>
+                <span>Completed</span>
+
+            </div>
+
+
+            <!-- Order Items -->
+
+            <h4 class="fw-bold mb-3">
+                🍽️ Ordered Items
+            </h4>
+
+            <div class="table-responsive">
+
+                <table class="table table-bordered align-middle">
+
+                    <thead class="table-light">
+
+                        <tr>
+                            <th>Item</th>
+                            <th class="text-center">
+                                Quantity
+                            </th>
+                            <th class="text-end">
+                                Unit Price
+                            </th>
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        @foreach (var item in Model.Items)
+                        {
+                            <tr>
+
+                                <td>
+                                    <strong>
+                                        @item.MenuItem?.Name
+                                    </strong>
+                                </td>
+
+                                <td class="text-center">
+                                    @item.Quantity
+                                </td>
+
+                                <td class="text-end">
+                                    ₹@item.UnitPrice.ToString("0.00")
+                                </td>
+
+                            </tr>
+                        }
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+
+            <!-- Timing Information -->
+
+            <div class="row g-4 mt-2">
+
+                <div class="col-md-6">
+
+                    <div class="card bg-light border-0 h-100">
+
+                        <div class="card-body text-center">
+
+                            <div class="fs-2">
+                                ⏱️
+                            </div>
+
+                            <h5 class="fw-bold">
+                                Estimated Ready Time
+                            </h5>
+
+                            <p class="mb-0">
+                                @Model.EstimatedReadyOn.ToString(
+                                    "dd-MM-yyyy hh:mm tt")
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="col-md-6">
+
+                    <div class="card bg-light border-0 h-100">
+
+                        <div class="card-body text-center">
+
+                            <div class="fs-2">
+                                🕐
+                            </div>
+
+                            <h5 class="fw-bold">
+                                Pickup Slot
+                            </h5>
+
+                            <p class="mb-0">
+                                @Model.PickupSlot.ToString(
+                                    "dd-MM-yyyy hh:mm tt")
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- Action Buttons -->
+
+            <div class="text-center mt-4">
+
+                <a asp-controller="Menu"
+                   asp-action="Index"
+                   class="btn btn-primary btn-lg">
+
+                    🍽️ Back to Menu
+
+                </a>
+
+                <a asp-controller="Orders"
+                   asp-action="MyOrders"
+                   class="btn btn-outline-primary btn-lg ms-2">
+
+                    📋 My Orders
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- Auto Refresh Notice -->
+
+    @if (Model.Status != "Completed")
+    {
+        <div class="alert alert-info text-center">
+
+            🔄 Order status updates automatically every
+            <strong>10 seconds</strong>.
+
+        </div>
+    }
+
+</div>
+
+
+<!-- Automatic Status Refresh -->
+
+<script>
+
+    setTimeout(function () {
+        location.reload();
+    }, 10000);
+
+</script>

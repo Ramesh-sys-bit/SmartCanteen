@@ -1,0 +1,265 @@
+﻿@model IEnumerable<SmartCanteen.Models.MenuItem>
+
+@{
+    ViewData["Title"] = "Manage Menu";
+}
+
+<div class="container">
+
+    <!-- Page Header -->
+
+    <div class="text-center mb-4">
+
+        <h1 class="fw-bold">
+            ⚙️ Menu Management
+        </h1>
+
+        <p class="text-muted">
+            Manage food stock and menu availability.
+        </p>
+
+    </div>
+
+
+    <!-- Messages -->
+
+    @if (TempData["Success"] != null)
+    {
+        <div class="alert alert-success shadow-sm">
+
+            <strong>✓ Success:</strong>
+            @TempData["Success"]
+
+        </div>
+    }
+
+    @if (TempData["Error"] != null)
+    {
+        <div class="alert alert-danger shadow-sm">
+
+            <strong>⚠️ Error:</strong>
+            @TempData["Error"]
+
+        </div>
+    }
+
+
+    <!-- Menu Table -->
+
+    <div class="card border-0 shadow-sm">
+
+        <div class="card-body p-0">
+
+            <div class="table-responsive">
+
+                <table class="table table-hover align-middle mb-0">
+
+                    <thead class="table-dark">
+
+                        <tr>
+
+                            <th class="px-4">
+                                Food Item
+                            </th>
+
+                            <th>
+                                Price
+                            </th>
+
+                            <th>
+                                Preparation
+                            </th>
+
+                            <th>
+                                Current Stock
+                            </th>
+
+                            <th>
+                                Status
+                            </th>
+
+                            <th class="px-4">
+                                Update
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody>
+
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+
+                                <!-- Item -->
+
+                                <td class="px-4">
+
+                                    <div class="fw-bold">
+                                        @item.Name
+                                    </div>
+
+                                    <small class="text-muted">
+                                        Menu Item #@item.Id
+                                    </small>
+
+                                </td>
+
+
+                                <!-- Price -->
+
+                                <td>
+
+                                    <span class="fw-bold text-primary">
+                                        ₹@item.Price.ToString("0.00")
+                                    </span>
+
+                                </td>
+
+
+                                <!-- Preparation -->
+
+                                <td>
+
+                                    <span class="badge bg-light text-dark border">
+
+                                        ⏱️ @item.PrepMinutes min
+
+                                    </span>
+
+                                </td>
+
+
+                                <!-- Stock -->
+
+                                <td>
+
+                                    @if (item.StockQty == 0)
+                                    {
+                                        <span class="badge bg-danger">
+                                            Out of Stock
+                                        </span>
+                                    }
+                                    else if (item.StockQty <= 5)
+                                    {
+                                        <span class="badge bg-warning text-dark">
+                                            Low: @item.StockQty
+                                        </span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge bg-success">
+                                            @item.StockQty Available
+                                        </span>
+                                    }
+
+                                </td>
+
+
+                                <!-- Status -->
+
+                                <td>
+
+                                    @if (item.IsAvailable)
+                                    {
+                                        <span class="badge bg-success">
+                                            ✓ Available
+                                        </span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge bg-danger">
+                                            ✕ Unavailable
+                                        </span>
+                                    }
+
+                                </td>
+
+
+                                <!-- Update Form -->
+
+                                <td class="px-4">
+
+                                    <form asp-controller="Menu"
+                                          asp-action="UpdateStock"
+                                          method="post">
+
+                                        <input type="hidden"
+                                               name="id"
+                                               value="@item.Id" />
+
+
+                                        <div class="mb-2">
+
+                                            <label class="form-label small fw-semibold">
+                                                Stock Quantity
+                                            </label>
+
+                                            <input type="number"
+                                                   name="stockQty"
+                                                   value="@item.StockQty"
+                                                   min="0"
+                                                   max="500"
+                                                   class="form-control"
+                                                   required />
+
+                                        </div>
+
+
+                                        <div class="form-check mb-2">
+
+                                            <input type="checkbox"
+                                                   name="isAvailable"
+                                                   value="true"
+                                                   class="form-check-input"
+                                                   @(item.IsAvailable ? "checked" : "") />
+
+                                            <label class="form-check-label">
+                                                Available
+                                            </label>
+
+                                        </div>
+
+
+                                        <button type="submit"
+                                                class="btn btn-primary w-100">
+
+                                            💾 Update
+
+                                        </button>
+
+                                    </form>
+
+                                </td>
+
+                            </tr>
+                        }
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- Back To Menu -->
+
+    <div class="text-center mt-4 mb-4">
+
+        <a asp-controller="Menu"
+           asp-action="Index"
+           class="btn btn-outline-secondary">
+
+            🍽️ Back to Menu
+
+        </a>
+
+    </div>
+
+</div>
